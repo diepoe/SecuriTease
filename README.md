@@ -31,4 +31,21 @@ java -cp "target/classes:CONTENT_OF_.classpath_FILE" com.diepoe.SecuriTeaseApp
 ```
 
 ### Testing
--[] TODO: implement testing
+
+#### run unit tests
+
+```sh
+mvn clean test
+```
+
+#### run grading testing program
+
+1. Package the project
+```sh
+mvn clean package
+```
+
+2. Run the test program
+```sh
+java -cp "target/classes:CONTENT_OF_.classpath_FILE" com.cthiebaud.PasswordValidatorTester PROJECT_DIRECTORY/target/securitease-1.0.0-SNAPSHOT.jar
+```
