@@ -49,3 +49,57 @@ mvn clean package
 ```sh
 java -cp "target/classes:CONTENT_OF_.classpath_FILE" com.cthiebaud.PasswordValidatorTester $PWD/target/securitease-1.0.0-SNAPSHOT.jar
 ```
+
+
+## Project structure
+(Draft)
+```mermaid
+classDiagram
+    ValidationResult -- PasswordValidator
+    PasswordValidator <|-- SecuriTease : implements
+    SecuriTease <.. SecuriTeaseApp
+    
+    namespace com.diepoe {
+        class SecuriTeaseApp {
+            +void main()$
+        }
+
+        class com.diepoe.securitease
+    }
+
+    namespace com.diepoe.securitease {
+        class SecuriTease {
+            +ValidationResult validate(String potentialPassword)
+        }
+    }
+
+    %% given by @cthiebaud:
+
+    namespace com.cthiebaud{
+        class PasswordValidatorTester {
+            +void main()$
+            -List&lt;Class&lt;?&gt;&gt; findPasswordValidatorClasses()$
+            -void printBigOK()$
+        }
+
+        class com.cthiebaud.passwordvalidator
+    }
+    PasswordValidator <.. PasswordValidatorTester
+    SecuriTease <.. PasswordValidatorTester
+    ValidationResult <.. PasswordValidatorTester
+
+    namespace com.cthiebaud.passwordvalidator{
+        class ValidationResult {
+            boolean isValid
+            String message
+        }
+        
+        class PasswordValidator {
+            ValidationResult validate(String potentialPassword)
+        }
+    }
+
+    <<record>> ValidationResult
+    <<interface>> PasswordValidator
+
+```
