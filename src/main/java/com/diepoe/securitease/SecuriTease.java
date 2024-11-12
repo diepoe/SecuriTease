@@ -1,6 +1,7 @@
 package com.diepoe.securitease;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.cthiebaud.passwordvalidator.PasswordValidator;
@@ -13,14 +14,15 @@ import com.cthiebaud.passwordvalidator.ValidationResult;
  * @implNote PasswordValidator prerequisite for the project design
  */
 public class SecuriTease implements PasswordValidator {
-    private Map<CheckingFunction, String[]> rules;
+    private List<Rule> rules;
 
     public SecuriTease() {
         // TODO: implement randomized setting of the rules
-        rules = new HashMap<>();
-        rules.put(this::checkLength, new String[] { "Password must be at least 8 characters long" });
-        rules.put(this::checkRomanLiteralSum,
-                new String[] { "The roman literals in your password have to sum up to 3" });
+        rules = new ArrayList<>();
+
+        rules.add(new Rule(this::checkLength, new String[] { "Password must be at least 8 characters long" }, 8));
+        rules.add(new Rule(this::checkRomanLiteralSum,
+                new String[] { "The roman literals in your password have to sum up to 3" }, 3));
     }
 
     /**
@@ -29,13 +31,12 @@ public class SecuriTease implements PasswordValidator {
      * @param potentialPassord the password to validate
      */
     public ValidationResult validate(String potentialPassord) {
-        // TODO implement usage of the rules map
-        int requiredSum = 4;
-        boolean valid = checkRomanLiteralSum(potentialPassord, requiredSum);
-        String message = String.format("The roman literals in your password have to sum up to %d", requiredSum);
-        if (valid) {
-            message = "Passwordo e perfecto!";
-        }
+        // TODO implement usage of the rules list
+
+        Rule rule = rules.get(1);
+        CheckingFunction checker = rule.getCheckingFunction();
+        boolean valid = checker.check(potentialPassord, rule.getThreshold());
+        String message = rule.getFeedbackMessage()[0];
 
         return new ValidationResult(valid, message);
     }
@@ -76,5 +77,29 @@ public class SecuriTease implements PasswordValidator {
         }
 
         return sum == requiredSum;
+    }
+}
+
+class Rule {
+    private CheckingFunction checkingFunction;
+    private String[] feedbackMessage;
+    private int threshold;
+
+    public Rule(CheckingFunction checkingFunction, String[] feedbackMessage, int threshold) {
+        this.checkingFunction = checkingFunction;
+        this.feedbackMessage = feedbackMessage;
+        this.threshold = threshold;
+    }
+
+    public CheckingFunction getCheckingFunction() {
+        return checkingFunction;
+    }
+
+    public String[] getFeedbackMessage() {
+        return feedbackMessage;
+    }
+
+    public int getThreshold() {
+        return threshold;
     }
 }
