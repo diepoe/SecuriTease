@@ -1,5 +1,6 @@
 package com.diepoe.securitease;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.cthiebaud.passwordvalidator.PasswordValidator;
@@ -16,6 +17,7 @@ public class SecuriTease implements PasswordValidator {
 
     public SecuriTease() {
         // TODO: implement randomized setting of the rules
+        rules = new HashMap<>();
         rules.put(this::checkLength, new String[] { "Password must be at least 8 characters long" });
         rules.put(this::checkRomanLiteralSum,
                 new String[] { "The roman literals in your password have to sum up to 3" });
@@ -28,7 +30,7 @@ public class SecuriTease implements PasswordValidator {
      */
     public ValidationResult validate(String potentialPassord) {
         // TODO implement usage of the rules map
-        int requiredSum = 3;
+        int requiredSum = 4;
         boolean valid = checkRomanLiteralSum(potentialPassord, requiredSum);
         String message = String.format("The roman literals in your password have to sum up to %d", requiredSum);
         if (valid) {
@@ -37,7 +39,6 @@ public class SecuriTease implements PasswordValidator {
 
         return new ValidationResult(valid, message);
     }
-
 
     // TODO create various types of checking methods for different yet-to-specify
     // rules
