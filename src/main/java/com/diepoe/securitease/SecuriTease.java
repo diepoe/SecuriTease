@@ -43,6 +43,14 @@ public class SecuriTease implements PasswordValidator {
 
     // TODO create various types of checking methods for different yet-to-specify
     // rules
+
+    /**
+     * Checks if a given password meets a certain length criteria
+     * 
+     * @param password String - the password to be checked
+     * @param requiredLength int - the minimal length of the password string
+     * @return boolean - String.length >= int
+     */
     private boolean checkLength(String password, int requiredLength) {
         return password.length() >= requiredLength;
     }
