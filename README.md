@@ -25,9 +25,9 @@ mvn dependency:build-classpath -Dmdep.outputFile=.classpath
 mvn clean compile
 ```
 
-4. Run the project (classpath was exported in step *2* into the `.classpath` file):
+4. Run the project (classpath was exported in step *2* into the `.classpath` file, use that if the provided command isn't working):
 ```sh
-java -cp "target/classes:CONTENT_OF_.classpath_FILE" com.diepoe.SecuriTeaseApp
+java -cp "target/classes:/Users/$(whoami)/.m2/repository/com/cthiebaud/password-validator/1.0-SNAPSHOT/password-validator-1.0-SNAPSHOT.jar" com.diepoe.SecuriTeaseApp
 ```
 
 ### Testing
