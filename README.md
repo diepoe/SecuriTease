@@ -54,10 +54,14 @@ java -cp "target/classes:CONTENT_OF_.classpath_FILE" com.cthiebaud.PasswordValid
 ## Project structure
 (Draft)
 ```mermaid
+---
+title: SecuriTease
+---
 classDiagram
     ValidationResult -- PasswordValidator
     PasswordValidator <|-- SecuriTease : implements
     SecuriTease <.. SecuriTeaseApp
+    SecuriTease -- CheckingFunction
     
     namespace com.diepoe {
         class SecuriTeaseApp {
@@ -69,9 +73,18 @@ classDiagram
 
     namespace com.diepoe.securitease {
         class SecuriTease {
+            -Map&lt;CheckingFunction, String[]&gt; rules
             +ValidationResult validate(String potentialPassword)
+            -boolean checkLength(String password, int requiredLength)
+            -boolean checkRomanLiteralSum(String password, int requiredSum)
         }
+
+        class CheckingFunction {
+            boolean check(String password, int threshold)
+        } 
     }
+
+    <<interface>> CheckingFunction
 
     %% given by @cthiebaud:
 
