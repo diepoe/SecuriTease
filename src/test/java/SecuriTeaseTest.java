@@ -8,6 +8,6 @@ public class SecuriTeaseTest {
     @Test
     public void test() {
         SecuriTease securiTease = new SecuriTease();
-        assertEquals(securiTease.validate("password").isValid(), true);
+        assertEquals(securiTease.validate("password").isValid(), false);
     }
 }
