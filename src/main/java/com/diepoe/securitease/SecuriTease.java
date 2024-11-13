@@ -89,7 +89,7 @@ public class SecuriTease implements PasswordValidator {
     /**
      * main validation method
      * 
-     * @param potentialPassord the password to validate
+     * @param potentialPassword the password to validate
      */
     public ValidationResult validate(String potentialPassword) {
         boolean valid = true;
