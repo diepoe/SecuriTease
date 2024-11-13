@@ -19,21 +19,22 @@ public class SecuriTease implements PasswordValidator {
 
     // List of European countries in German
     private static final List<String> EUROPEAN_COUNTRIES_DE = Arrays.asList(
-        "Albanien", "Andorra", "Belarus", "Belgien", "Bosnien und Herzegowina", "Bulgarien", "Dänemark", 
-        "Deutschland", "Estland", "Finnland", "Frankreich", "Griechenland", "Irland", "Island", "Italien", 
-        "Kosovo", "Kroatien", "Latvia", "Liechtenstein", "Litauen", "Luxemburg", "Malta", "Moldawien", 
-        "Monaco", "Montenegro", "Niederlande", "Nordmazedonien", "Norwegen", "Österreich", "Polen", "Portugal", 
-        "Rumänien", "Russland", "San Marino", "Schweden", "Schweiz", "Serbien", "Slowakei", "Slowenien", "Spanien", 
-        "Tschechien", "Türkei", "Ukraine", "Ungarn", "Vatikanstadt", "Vereinigtes Königreich");
+            "Albanien", "Andorra", "Belarus", "Belgien", "Bosnien und Herzegowina", "Bulgarien", "Dänemark",
+            "Deutschland", "Estland", "Finnland", "Frankreich", "Griechenland", "Irland", "Island", "Italien",
+            "Kosovo", "Kroatien", "Latvia", "Liechtenstein", "Litauen", "Luxemburg", "Malta", "Moldawien",
+            "Monaco", "Montenegro", "Niederlande", "Nordmazedonien", "Norwegen", "Österreich", "Polen", "Portugal",
+            "Rumänien", "Russland", "San Marino", "Schweden", "Schweiz", "Serbien", "Slowakei", "Slowenien", "Spanien",
+            "Tschechien", "Türkei", "Ukraine", "Ungarn", "Vatikanstadt", "Vereinigtes Königreich");
 
     // List of European countries in English
     private static final List<String> EUROPEAN_COUNTRIES_EN = Arrays.asList(
-        "Albania", "Andorra", "Belarus", "Belgium", "Bosnia and Herzegovina", "Bulgaria", "Denmark", "Germany", 
-        "Estonia", "Finland", "France", "Greece", "Ireland", "Iceland", "Italy", "Kosovo", "Croatia", 
-        "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Malta", "Moldova", "Monaco", "Montenegro", "Netherlands", 
-        "North Macedonia", "Norway", "Austria", "Poland", "Portugal", "Romania", "Russia", "San Marino", "Sweden", 
-        "Switzerland", "Serbia", "Slovakia", "Slovenia", "Spain", "Czech Republic", "Turkey", "Ukraine", "Hungary", 
-        "Vatican City", "United Kingdom");
+            "Albania", "Andorra", "Belarus", "Belgium", "Bosnia and Herzegovina", "Bulgaria", "Denmark", "Germany",
+            "Estonia", "Finland", "France", "Greece", "Ireland", "Iceland", "Italy", "Kosovo", "Croatia",
+            "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Malta", "Moldova", "Monaco", "Montenegro",
+            "Netherlands",
+            "North Macedonia", "Norway", "Austria", "Poland", "Portugal", "Romania", "Russia", "San Marino", "Sweden",
+            "Switzerland", "Serbia", "Slovakia", "Slovenia", "Spain", "Czech Republic", "Turkey", "Ukraine", "Hungary",
+            "Vatican City", "United Kingdom");
 
     // List of Roman values
     private static final Map<Character, Integer> ROMAN_VALUES = Map.of(
@@ -47,12 +48,10 @@ public class SecuriTease implements PasswordValidator {
 
     // List of famous Composers
     private static final List<String> Composers = Arrays.asList(
-        "Bach", "Beethoven", "Mozart", "Chopin", "Schubert", "Brahms",
-        "Vivaldi", "Verdi", "Wagner", "Tschaikowski", "Stravinsky",
-        "Mahler", "Debussy", "Haydn", "Mendelssohn", "Händel", "Liszt",
-        "Rachmaninoff", "Ravel", "Kreisler");
-
-            
+            "Bach", "Beethoven", "Mozart", "Chopin", "Schubert", "Brahms",
+            "Vivaldi", "Verdi", "Wagner", "Tschaikowski", "Stravinsky",
+            "Mahler", "Debussy", "Haydn", "Mendelssohn", "Händel", "Liszt",
+            "Rachmaninoff", "Ravel", "Kreisler");
 
     public SecuriTease() {
         // TODO: implement randomized setting of the rules
@@ -60,16 +59,15 @@ public class SecuriTease implements PasswordValidator {
 
         rules.add(new Rule(this::checkLength, new String[] { "Password must be at least 8 characters long" }, 8));
         rules.add(new Rule(this::checkRomanLiteralSum,
-                new String[] { "The roman literals in your password have to sum up to 3"}, 3));
-        rules.add(new Rule(this::checkContainsEuropeanCountry, 
-                new String[] { "Password must contain the name of a European country" }, 1)); 
-        rules.add(new Rule(this::checkContainsComposer, 
+                new String[] { "The roman literals in your password have to sum up to 42" }, 42));
+        rules.add(new Rule(this::checkContainsEuropeanCountry,
+                new String[] { "Password must contain the name of a European country" }, 1));
+        rules.add(new Rule(this::checkContainsComposer,
                 new String[] { "Password must contain the name of a famous composer" }, 1));
-        rules.add(new Rule(this::checkMeaningOfLife, //Neu Mika
-        new String[] { "What is the meaning of life?" }, 42)); //Neu Mika
+        rules.add(new Rule(this::checkMeaningOfLife, // Neu Mika
+                new String[] { "What is the meaning of life?" }, 42)); // Neu Mika
 
     }
-    
 
     /**
      * main validation method
@@ -99,7 +97,7 @@ public class SecuriTease implements PasswordValidator {
     /**
      * Checks if a given password meets a certain length criteria
      * 
-     * @param password String - the password to be checked
+     * @param password       String - the password to be checked
      * @param requiredLength int - the minimal length of the password string
      * @return boolean - String.length >= int
      */
@@ -108,7 +106,6 @@ public class SecuriTease implements PasswordValidator {
     }
 
     private boolean checkRomanLiteralSum(String password, int requiredSum) {
-       
         int sum = 0;
         int prevValue = 0;
 
@@ -133,11 +130,13 @@ public class SecuriTease implements PasswordValidator {
 
     private boolean checkContainsEuropeanCountry(String password, int threshold) {
         // Checks if password contains a European Country, case-insensitive
-        boolean containsCountryDE = EUROPEAN_COUNTRIES_DE.stream().anyMatch(country -> password.toLowerCase().contains(country.toLowerCase()));
-        boolean containsCountryEN = EUROPEAN_COUNTRIES_EN.stream().anyMatch(country -> password.toLowerCase().contains(country.toLowerCase()));
+        boolean containsCountryDE = EUROPEAN_COUNTRIES_DE.stream()
+                .anyMatch(country -> password.toLowerCase().contains(country.toLowerCase()));
+        boolean containsCountryEN = EUROPEAN_COUNTRIES_EN.stream()
+                .anyMatch(country -> password.toLowerCase().contains(country.toLowerCase()));
         return containsCountryDE || containsCountryEN;
     }
-    
+
     private boolean checkContainsComposer(String password, int threshold) {
         // Checks if password contains a famous composer, case-insensitive
         return Composers.stream().anyMatch(composer -> password.toLowerCase().contains(composer.toLowerCase()));
