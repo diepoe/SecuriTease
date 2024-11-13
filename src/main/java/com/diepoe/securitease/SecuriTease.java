@@ -88,10 +88,7 @@ public class SecuriTease implements PasswordValidator {
             boolean ruleValid = rule.getCheckingFunction().check(potentialPassword, rule.getThreshold());
             if (!ruleValid) {
                 valid = false;
-
-                // select random feedback message
-                int randomMessageIndex = (int) (Math.random() * rule.getFeedbackMessage().length);
-                message = rule.getFeedbackMessage()[randomMessageIndex];
+                message = rule.getRandomFeedbackMessage();
                 break;
             }
         }
