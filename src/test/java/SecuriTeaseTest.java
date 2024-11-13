@@ -14,6 +14,6 @@ public class SecuriTeaseTest {
     @Test
     public void testValidPassword() {
         SecuriTease securiTease = new SecuriTease(true);
-        assertEquals(true, securiTease.validate("XXXXIIitaly").isValid());
+        assertEquals(true, securiTease.validate("WagnerXXXXIIitaly").isValid());
     }
 }
