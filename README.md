@@ -52,7 +52,7 @@ java -cp "target/classes:CONTENT_OF_.classpath_FILE" com.cthiebaud.PasswordValid
 
 
 ## Project structure
-(Draft)
+
 ```mermaid
 ---
 title: SecuriTease
@@ -61,11 +61,12 @@ classDiagram
     ValidationResult -- PasswordValidator
     PasswordValidator <|-- SecuriTease : implements
     SecuriTease <.. SecuriTeaseApp
-    SecuriTease -- CheckingFunction
+    Rule -- CheckingFunction
+    SecuriTease -- Rule
     
     namespace com.diepoe {
         class SecuriTeaseApp {
-            +void main()$
+            +main()$
         }
 
         class com.diepoe.securitease
@@ -73,15 +74,25 @@ classDiagram
 
     namespace com.diepoe.securitease {
         class SecuriTease {
-            -Map&lt;CheckingFunction, String[]&gt; rules
-            +ValidationResult validate(String potentialPassword)
-            -boolean checkLength(String password, int requiredLength)
-            -boolean checkRomanLiteralSum(String password, int requiredSum)
+            -List~Rule~ rules
+            -List~String~ EUROPEAN_COUNTRIES_DE$
+            -List~String~ EUROPEAN_COUNTRIES_EN$
+            -Map~Character, Integer~ ROMAN_VALUES$
+            +validate(String potentialPassword) ValidationResult
+            -checkLength(String password, int requiredLength) boolean
+            -checkRomanLiteralSum(String password, int requiredSum) boolean
+            -checkContainsEuropeanCountry(String password, int threshold) boolean
         }
 
         class CheckingFunction {
             boolean check(String password, int threshold)
-        } 
+        }
+
+        class Rule {
+            -CheckingFunction checkingFunction;
+            -String[] feedbackMessage;
+            -int threshold;
+        }
     }
 
     <<interface>> CheckingFunction
@@ -90,9 +101,9 @@ classDiagram
 
     namespace com.cthiebaud{
         class PasswordValidatorTester {
-            +void main()$
-            -List&lt;Class&lt;?&gt;&gt; findPasswordValidatorClasses()$
-            -void printBigOK()$
+            +main(String[] args)$
+            -findPasswordValidatorClasses() List~Class~?~~$
+            -printBigOK()$
         }
 
         class com.cthiebaud.passwordvalidator
@@ -108,7 +119,7 @@ classDiagram
         }
         
         class PasswordValidator {
-            ValidationResult validate(String potentialPassword)
+            validate(String potentialPassword) ValidationResult
         }
     }
 
