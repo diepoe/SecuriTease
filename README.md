@@ -101,7 +101,7 @@ classDiagram
 
     namespace com.cthiebaud{
         class PasswordValidatorTester {
-            +main()$
+            +main(String[] args)$
             -findPasswordValidatorClasses() List~Class~?~~$
             -printBigOK()$
         }
