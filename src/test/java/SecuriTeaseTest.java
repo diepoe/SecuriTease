@@ -7,13 +7,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SecuriTeaseTest {
     @Test
     public void testInvalidPassword() {
-        SecuriTease securiTease = new SecuriTease(true);
+        SecuriTease securiTease = new SecuriTease();
         assertEquals(false, securiTease.validate("password").isValid());
     }
 
     @Test
     public void testValidPassword() {
-        SecuriTease securiTease = new SecuriTease(true);
+        SecuriTease securiTease = new SecuriTease();
         assertEquals(true, securiTease.validate("42WagnerXXXXIItaly312").isValid());
     }
 }
