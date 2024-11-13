@@ -26,7 +26,7 @@ public class SecuriTease implements PasswordValidator {
             "Rumänien", "Russland", "San Marino", "Schweden", "Schweiz", "Serbien", "Slowakei", "Slowenien", "Spanien",
             "Tschechien", "Türkei", "Ukraine", "Ungarn", "Vatikanstadt", "Vereinigtes Königreich");
 
-    // NList of European countries in English
+    // List of European countries in English
     private static final List<String> EUROPEAN_COUNTRIES_EN = Arrays.asList(
             "Albania", "Andorra", "Belarus", "Belgium", "Bosnia and Herzegovina", "Bulgaria", "Denmark", "Germany",
             "Estonia", "Finland", "France", "Greece", "Ireland", "Iceland", "Italy", "Kosovo", "Croatia",
