@@ -65,8 +65,13 @@ public class SecuriTease implements PasswordValidator {
                 new String[] { "Password must contain the name of a European country" }, 1)); 
         rules.add(new Rule(this::checkContainsComposer, 
                 new String[] { "Password must contain the name of a famous composer" }, 1));
+        rules.add(new Rule(this::checkEiffelTowerHeight, 
+                new String[] { "How tall is the Eiffel Tower?" }, 0)); //Neu Mika
+        //rules.add(new Rule(this::checkRiddleAnswer, 
+                //new String[] { "What has a head, a tail, but no body?" }, 0)); //Neu Mika
         rules.add(new Rule(this::checkMeaningOfLife, //Neu Mika
-        new String[] { "What is the meaning of life?" }, 42)); //Neu Mika
+                new String[] { "What is the meaning of life?" }, 42)); //Neu Mika
+        
 
     }
     
@@ -141,6 +146,27 @@ public class SecuriTease implements PasswordValidator {
     private boolean checkContainsComposer(String password, int threshold) {
         // Checks if password contains a famous composer, case-insensitive
         return Composers.stream().anyMatch(composer -> password.toLowerCase().contains(composer.toLowerCase()));
+    }
+
+    private boolean checkEiffelTowerHeight(String password, int threshold) {
+        String regex = "\\d+"; // Regex für Zahlen
+        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(regex);
+        java.util.regex.Matcher matcher = pattern.matcher(password);
+    
+        while (matcher.find()) {
+            try {
+                int height = Integer.parseInt(matcher.group());
+                if (height >= 300 && height <= 320) {
+                    return true;
+                }
+            } 
+            catch (NumberFormatException e) {
+                    return false; 
+                }
+        }
+        
+        // Wenn keine Zahl im gültigen Bereich gefunden wird, ist die Regel nicht erfüllt
+        return false;
     }
 
     private boolean checkMeaningOfLife(String password, int threshold) {
