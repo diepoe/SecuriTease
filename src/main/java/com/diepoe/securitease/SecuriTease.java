@@ -49,11 +49,18 @@ public class SecuriTease implements PasswordValidator {
         // TODO: implement randomized setting of the rules
         rules = new ArrayList<>();
 
-        rules.add(new Rule(this::checkLength, new String[] { "Password must be at least 8 characters long" }, 8));
+        rules.add(new Rule(this::checkLength, new String[] {
+                "[Rolls eyes dramatically] Listen honey, if you think I'm gonna accept your sad little short-as-a-stinky-fart password, you've got another thing coming. Make it 8 characters or more - I don't make the rules... oh wait, yes I do. 💅✨",
+                "[Augenrollen] Hör mal, Schnegge, wenn du denkst, dass ich deinen Furz von Passwort akzeptiere, dann hast du dich geschnitten. 8 Buchstaben in deiner hässlichen Handschrift oder mehr - ich mache die Regeln nicht... oh warte, doch. 💅✨",
+                "[Roule les yeux de façon dramatique] Écoute, chérie, si tu crois que je vais accepter ton petit mot de passe aussi court qu'un pet qui pue, tu te trompes. Mets 8 caractères ou plus - ce n'est pas moi qui fais les règles... oh attends, si je les fais. 💅✨" },
+                8));
         rules.add(new Rule(this::checkRomanLiteralSum,
-                new String[] { "The roman literals in your password have to sum up to 3"}, 3));
+                new String[] {
+                        "Oh sweetie... You really thought XLII was the answer? Darling, I need your Roman numerals to add up to 42, not whatever math disaster you just typed. Maybe take a little trip to the Forum and brush up on your arithmetic? I'll wait... [fixes toga] 🏛️" },
+                42));        
         rules.add(new Rule(this::checkContainsEuropeanCountry, 
                 new String[] { "Password must contain the name of a European country" }, 1)); 
+
     }
 
     /**
@@ -62,15 +69,15 @@ public class SecuriTease implements PasswordValidator {
      * @param potentialPassord the password to validate
      */
     public ValidationResult validate(String potentialPassword) {
-        // NEU: Durchlaufen der Regeln in der richtigen Reihenfolge
         for (Rule rule : rules) {
-            CheckingFunction checker = rule.getCheckingFunction();
-            boolean valid = checker.check(potentialPassword, rule.getThreshold());
-            String message = rule.getFeedbackMessage()[0];
+            boolean ruleValid = rule.getCheckingFunction().check(potentialPassord, rule.getThreshold());
+            if (!ruleValid) {
+                valid = false;
 
-            // Wenn eine Regel nicht erfüllt ist, gib das Ergebnis sofort zurück
-            if (!valid) {
-                return new ValidationResult(valid, message);
+                // select random feedback message
+                int randomMessageIndex = (int) (Math.random() * rule.getFeedbackMessage().length);
+                message = rule.getFeedbackMessage()[randomMessageIndex];
+                break;
             }
         }
 
