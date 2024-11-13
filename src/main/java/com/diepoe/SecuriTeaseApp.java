@@ -20,8 +20,7 @@ public class SecuriTeaseApp {
         SecuriTease validator = new SecuriTease();
 
         while (true) {
-            char[] passwordArray = console.readPassword("Enter a password to validate (or type 'quit' to exit): ");
-            String password = new String(passwordArray);
+            String password = console.readLine("Enter a password to validate (or type 'quit' to exit): ");
 
             // Check if the user wants to quit
             if ("quit".equalsIgnoreCase(password)) {
@@ -34,10 +33,19 @@ public class SecuriTeaseApp {
 
             // Display the result
             if (result.isValid()) {
-                System.out.println(result.message());
-                break;
+                char[] repeatedPasswordArray = console.readPassword(
+                        "Please repeat the password blindly (if your dumb brain can even remember it 🙄): ");
+                String repeatedPassword = new String(repeatedPasswordArray);
+
+                if (password.equals(repeatedPassword)) {
+                    System.out.println(result.message());
+                    break;
+                } else {
+                    System.out.println(
+                            "[Exasperated sigh] Sweetie... how hard is it to type the same thing twice? Like, literally just copy what you did the first time? But nooo, here we are... Whenever you're ready to get it together, I'll be waiting. Try. Again. 💅");
+                }
             } else {
-                System.out.println("Password is invalid: " + result.message());
+                System.out.println(result.message());
             }
         }
     }
