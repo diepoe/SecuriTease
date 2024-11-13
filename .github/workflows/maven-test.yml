@@ -18,6 +18,7 @@ jobs:
     - name: Set up Java and Maven
       uses: actions/setup-java@v3
       with:
+        java-version: '23'
         distribution: 'temurin'
         cache: 'maven'
         server-id: github
@@ -32,23 +33,6 @@ jobs:
         mkdir -p ~/.m2
         echo "<settings><servers><server><id>athenaeum-brew-maven-repo</id><username>${{ github.actor }}</username><password>${{ secrets.GITHUB_TOKEN }}</password></server></servers></settings>" > ~/.m2/settings.xml
 
-    # Method 2: Alternative approach using settings.xml
-    - name: Create settings.xml
-      uses: s4u/maven-settings-action@v3.0.0
-      with:
-        servers: |
-          [{
-            "id": "github",
-            "username": "${{ github.actor }}",
-            "password": "${{ secrets.GITHUB_TOKEN }}"
-          },
-          {
-            "id": "github-packages",
-            "username": "${{ github.actor }}",
-            "password": "${{ secrets.GITHUB_TOKEN }}"
-          }]
-        # Optional: Add private repositories if needed
-        githubServer: false  # Set to true if you want to add GitHub repository automatically
 
     - name: Run Tests
       run: mvn -B test
