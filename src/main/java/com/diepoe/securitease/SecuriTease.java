@@ -57,9 +57,15 @@ public class SecuriTease implements PasswordValidator {
         // TODO: implement randomized setting of the rules
         rules = new ArrayList<>();
 
-        rules.add(new Rule(this::checkLength, new String[] { "Password must be at least 8 characters long" }, 8));
+        rules.add(new Rule(this::checkLength, new String[] {
+                "[Rolls eyes dramatically] Listen honey, if you think I'm gonna accept your sad little short-as-a-stinky-fart password, you've got another thing coming. Make it 8 characters or more - I don't make the rules... oh wait, yes I do. 💅✨",
+                "[Augenrollen] Hör mal, Schnegge, wenn du denkst, dass ich deinen Furz von Passwort akzeptiere, dann hast du dich geschnitten. 8 Buchstaben in deiner hässlichen Handschrift oder mehr - ich mache die Regeln nicht... oh warte, doch. 💅✨",
+                "[Roule les yeux de façon dramatique] Écoute, chérie, si tu crois que je vais accepter ton petit mot de passe aussi court qu'un pet qui pue, tu te trompes. Mets 8 caractères ou plus - ce n'est pas moi qui fais les règles... oh attends, si je les fais. 💅✨" },
+                8));
         rules.add(new Rule(this::checkRomanLiteralSum,
-                new String[] { "The roman literals in your password have to sum up to 42" }, 42));
+                new String[] {
+                        "Oh sweetie... You really thought XLII was the answer? Darling, I need your Roman numerals to add up to 42, not whatever math disaster you just typed. Maybe take a little trip to the Forum and brush up on your arithmetic? I'll wait... [fixes toga] 🏛️" },
+                42));
         rules.add(new Rule(this::checkContainsEuropeanCountry,
                 new String[] { "Password must contain the name of a European country" }, 1));
         rules.add(new Rule(this::checkContainsComposer,
@@ -75,20 +81,22 @@ public class SecuriTease implements PasswordValidator {
      * @param potentialPassword the password to validate
      */
     public ValidationResult validate(String potentialPassword) {
-        // NEU: Durchlaufen der Regeln in der richtigen Reihenfolge
-        for (Rule rule : rules) {
-            CheckingFunction checker = rule.getCheckingFunction();
-            boolean valid = checker.check(potentialPassword, rule.getThreshold());
-            String message = rule.getFeedbackMessage()[0];
+        boolean valid = true;
+        String message = "[Slow clap] Ohhh, congratulations, you finally managed to enter a valid password. Want a cookie for doing the absolute bare minimum? 🙄";
 
-            // Wenn eine Regel nicht erfüllt ist, gib das Ergebnis sofort zurück
-            if (!valid) {
-                return new ValidationResult(valid, message);
+        for (Rule rule : rules) {
+            boolean ruleValid = rule.getCheckingFunction().check(potentialPassword, rule.getThreshold());
+            if (!ruleValid) {
+                valid = false;
+
+                // select random feedback message
+                int randomMessageIndex = (int) (Math.random() * rule.getFeedbackMessage().length);
+                message = rule.getFeedbackMessage()[randomMessageIndex];
+                break;
             }
         }
 
-        // Wenn alle Regeln erfüllt sind, return "valid"
-        return new ValidationResult(true, "Password is valid");
+        return new ValidationResult(valid, message);
     }
 
     // TODO create various types of checking methods for different yet-to-specify
@@ -97,14 +105,24 @@ public class SecuriTease implements PasswordValidator {
     /**
      * Checks if a given password meets a certain length criteria
      * 
-     * @param password       String - the password to be checked
-     * @param requiredLength int - the minimal length of the password string
-     * @return boolean - String.length >= int
+     * @param password       the string to be checked
+     * @param requiredLength the minimal length (int) of the password string
+     * @return true if the string length is bigger or equal than the required length
      */
     private boolean checkLength(String password, int requiredLength) {
         return password.length() >= requiredLength;
     }
 
+    /**
+     * Checks if the sum of the Roman numeral literals in the given password equals
+     * the required sum (threshold).
+     *
+     * @param password    the string containing Roman numeral literals to be checked
+     * @param requiredSum the sum that the Roman numeral literals in the password
+     *                    should equal
+     * @return true if the sum of the Roman numeral literals equals the required
+     *         sum, false otherwise
+     */
     private boolean checkRomanLiteralSum(String password, int requiredSum) {
         int sum = 0;
         int prevValue = 0;
