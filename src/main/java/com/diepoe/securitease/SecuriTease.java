@@ -26,7 +26,9 @@ public class SecuriTease implements PasswordValidator {
                 "[Roule les yeux de façon dramatique] Écoute, chérie, si tu crois que je vais accepter ton petit mot de passe aussi court qu'un pet qui pue, tu te trompes. Mets 8 caractères ou plus - ce n'est pas moi qui fais les règles... oh attends, si je les fais. 💅✨" },
                 8));
         rules.add(new Rule(this::checkRomanLiteralSum,
-                new String[] { "The roman literals in your password have to sum up to 3" }, 3));
+                new String[] {
+                        "Oh sweetie... You really thought XLII was the answer? Darling, I need your Roman numerals to add up to 42, not whatever math disaster you just typed. Maybe take a little trip to the Forum and brush up on your arithmetic? I'll wait... [fixes toga] 🏛️" },
+                42));
     }
 
     /**
