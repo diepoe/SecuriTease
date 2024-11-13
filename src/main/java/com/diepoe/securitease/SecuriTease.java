@@ -50,7 +50,7 @@ public class SecuriTease implements PasswordValidator {
         "Bach", "Beethoven", "Mozart", "Chopin", "Schubert", "Brahms",
         "Vivaldi", "Verdi", "Wagner", "Tschaikowski", "Stravinsky",
         "Mahler", "Debussy", "Haydn", "Mendelssohn", "Händel", "Liszt",
-        "Rachmaninoff", "Ravel");
+        "Rachmaninoff", "Ravel", "Kreisler");
 
             
 
@@ -64,8 +64,11 @@ public class SecuriTease implements PasswordValidator {
         rules.add(new Rule(this::checkContainsEuropeanCountry, 
                 new String[] { "Password must contain the name of a European country" }, 1)); 
         rules.add(new Rule(this::checkContainsComposer, 
-        new String[] { "Password must contain the name of a famous composer" }, 1));
-}
+                new String[] { "Password must contain the name of a famous composer" }, 1));
+        rules.add(new Rule(this::checkMeaningOfLife, //Neu Mika
+        new String[] { "What is the meaning of life?" }, 42)); //Neu Mika
+
+    }
     
 
     /**
@@ -138,5 +141,9 @@ public class SecuriTease implements PasswordValidator {
     private boolean checkContainsComposer(String password, int threshold) {
         // Checks if password contains a famous composer, case-insensitive
         return Composers.stream().anyMatch(composer -> password.toLowerCase().contains(composer.toLowerCase()));
+    }
+
+    private boolean checkMeaningOfLife(String password, int threshold) {
+        return password.contains("42");
     }
 }
