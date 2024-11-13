@@ -1,6 +1,7 @@
 package com.diepoe.securitease;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -16,13 +17,43 @@ import com.cthiebaud.passwordvalidator.ValidationResult;
 public class SecuriTease implements PasswordValidator {
     private List<Rule> rules;
 
+    // List of European countries in German
+    private static final List<String> EUROPEAN_COUNTRIES_DE = Arrays.asList(
+        "Albanien", "Andorra", "Belarus", "Belgien", "Bosnien und Herzegowina", "Bulgarien", "Dänemark", 
+        "Deutschland", "Estland", "Finnland", "Frankreich", "Griechenland", "Irland", "Island", "Italien", 
+        "Kosovo", "Kroatien", "Latvia", "Liechtenstein", "Litauen", "Luxemburg", "Malta", "Moldawien", 
+        "Monaco", "Montenegro", "Niederlande", "Nordmazedonien", "Norwegen", "Österreich", "Polen", "Portugal", 
+        "Rumänien", "Russland", "San Marino", "Schweden", "Schweiz", "Serbien", "Slowakei", "Slowenien", "Spanien", 
+        "Tschechien", "Türkei", "Ukraine", "Ungarn", "Vatikanstadt", "Vereinigtes Königreich");
+
+    // NList of European countries in English
+    private static final List<String> EUROPEAN_COUNTRIES_EN = Arrays.asList(
+        "Albania", "Andorra", "Belarus", "Belgium", "Bosnia and Herzegovina", "Bulgaria", "Denmark", "Germany", 
+        "Estonia", "Finland", "France", "Greece", "Ireland", "Iceland", "Italy", "Kosovo", "Croatia", 
+        "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Malta", "Moldova", "Monaco", "Montenegro", "Netherlands", 
+        "North Macedonia", "Norway", "Austria", "Poland", "Portugal", "Romania", "Russia", "San Marino", "Sweden", 
+        "Switzerland", "Serbia", "Slovakia", "Slovenia", "Spain", "Czech Republic", "Turkey", "Ukraine", "Hungary", 
+        "Vatican City", "United Kingdom");
+
+    private static final Map<Character, Integer> ROMAN_VALUES = Map.of(
+            'I', 1,
+            'V', 5,
+            'X', 10,
+            'L', 50,
+            'C', 100,
+            'D', 500,
+            'M', 1000);
+            
+
     public SecuriTease() {
-        // TODO: implement randomized setting of the ruleset
-        rules = new ArrayList<>(10);
+        // TODO: implement randomized setting of the rules
+        rules = new ArrayList<>();
 
         rules.add(new Rule(this::checkLength, new String[] { "Password must be at least 8 characters long" }, 8));
         rules.add(new Rule(this::checkRomanLiteralSum,
-                new String[] { "The roman literals in your password have to sum up to 3" }, 3));
+                new String[] { "The roman literals in your password have to sum up to 3"}, 3));
+        rules.add(new Rule(this::checkContainsEuropeanCountry, 
+                new String[] { "Password must contain the name of a European country" }, 1)); 
     }
 
     /**
@@ -30,20 +61,21 @@ public class SecuriTease implements PasswordValidator {
      * 
      * @param potentialPassord the password to validate
      */
-    public ValidationResult validate(String potentialPassord) {
-        boolean valid = true;
-        String message = "[Slow clap] Ohhh, congratulations, you finally managed to enter a valid password. Want a cookie for doing the absolute bare minimum? 🙄";
-
+    public ValidationResult validate(String potentialPassword) {
+        // NEU: Durchlaufen der Regeln in der richtigen Reihenfolge
         for (Rule rule : rules) {
-            boolean ruleValid = rule.getCheckingFunction().check(potentialPassord, rule.getThreshold());
-            if (!ruleValid) {
-                valid = false;
-                message = rule.getFeedbackMessage()[0];
-                break;
+            CheckingFunction checker = rule.getCheckingFunction();
+            boolean valid = checker.check(potentialPassword, rule.getThreshold());
+            String message = rule.getFeedbackMessage()[0];
+
+            // Wenn eine Regel nicht erfüllt ist, gib das Ergebnis sofort zurück
+            if (!valid) {
+                return new ValidationResult(valid, message);
             }
         }
 
-        return new ValidationResult(valid, message);
+        // Wenn alle Regeln erfüllt sind, return "valid"
+        return new ValidationResult(true, "Password is valid");
     }
 
     // TODO create various types of checking methods for different yet-to-specify
@@ -52,41 +84,23 @@ public class SecuriTease implements PasswordValidator {
     /**
      * Checks if a given password meets a certain length criteria
      * 
-     * @param password       the string to be checked
-     * @param requiredLength the minimal length (int) of the password string
-     * @return true if the string length is bigger or equal than the required length
+     * @param password String - the password to be checked
+     * @param requiredLength int - the minimal length of the password string
+     * @return boolean - String.length >= int
      */
     private boolean checkLength(String password, int requiredLength) {
         return password.length() >= requiredLength;
     }
 
-    /**
-     * Checks if the sum of the Roman numeral literals in the given password equals
-     * the required sum (threshold).
-     *
-     * @param password    the string containing Roman numeral literals to be checked
-     * @param requiredSum the sum that the Roman numeral literals in the password
-     *                    should equal
-     * @return true if the sum of the Roman numeral literals equals the required
-     *         sum, false otherwise
-     */
     private boolean checkRomanLiteralSum(String password, int requiredSum) {
-        Map<Character, Integer> romanValues = Map.of(
-                'I', 1,
-                'V', 5,
-                'X', 10,
-                'L', 50,
-                'C', 100,
-                'D', 500,
-                'M', 1000);
-
+       
         int sum = 0;
         int prevValue = 0;
 
         // Iterate right to left to handle subtraction cases
         for (int i = password.length() - 1; i >= 0; i--) {
             char c = password.charAt(i);
-            int currentValue = romanValues.getOrDefault(c, 0);
+            int currentValue = ROMAN_VALUES.getOrDefault(c, 0);
 
             // If previous value is greater, add normally
             // If previous value is smaller, subtract (like IV = 4)
@@ -100,5 +114,12 @@ public class SecuriTease implements PasswordValidator {
         }
 
         return sum == requiredSum;
+    }
+
+    private boolean checkContainsEuropeanCountry(String password, int threshold) {
+        // Checks if password contains a European Country, case-insensitive
+        boolean containsCountryDE = EUROPEAN_COUNTRIES_DE.stream().anyMatch(country -> password.toLowerCase().contains(country.toLowerCase()));
+        boolean containsCountryEN = EUROPEAN_COUNTRIES_EN.stream().anyMatch(country -> password.toLowerCase().contains(country.toLowerCase()));
+        return containsCountryDE || containsCountryEN;
     }
 }
