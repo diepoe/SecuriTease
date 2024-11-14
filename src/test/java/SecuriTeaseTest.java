@@ -1,14 +1,21 @@
 import com.diepoe.securitease.SecuriTease;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 
 public class SecuriTeaseTest {
+    private SecuriTease securiTease;
+
+    @BeforeEach
+    public void init() {
+        securiTease = new SecuriTease();
+    }
+
     @Test
     public void testInvalidPassword() {
-        SecuriTease securiTease = new SecuriTease();
         String invalidPassword = "pasword"; // too short
 
         String[] want = {
@@ -24,7 +31,6 @@ public class SecuriTeaseTest {
 
     @Test
     public void testValidPassword() {
-        SecuriTease securiTease = new SecuriTease();
         String validPassword = "42WagnerXXXXIItaly312"; // a minimal valid password
 
         assertTrue(securiTease.validate(validPassword).isValid(), "Password is invalid but should be valid");
