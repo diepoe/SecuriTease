@@ -106,7 +106,7 @@ public class SecuriTease implements PasswordValidator {
      * @param requiredLength the minimal length (int) of the password string
      * @return true if the string length is bigger or equal than the required length
      */
-    private boolean checkLength(String password, int requiredLength) {
+    boolean checkLength(String password, int requiredLength) {
         return password.length() >= requiredLength;
     }
 
@@ -120,7 +120,7 @@ public class SecuriTease implements PasswordValidator {
      * @return true if the sum of the Roman numeral literals equals the required
      *         sum, false otherwise
      */
-    private boolean checkRomanLiteralSum(String password, int requiredSum) {
+    boolean checkRomanLiteralSum(String password, int requiredSum) {
         int sum = 0;
         int prevValue = 0;
 
@@ -143,7 +143,7 @@ public class SecuriTease implements PasswordValidator {
         return sum == requiredSum;
     }
 
-    private boolean checkContainsEuropeanCountry(String password, int threshold) {
+    boolean checkContainsEuropeanCountry(String password, int threshold) {
         // Checks if password contains a European Country, case-insensitive
         boolean containsCountryDE = EUROPEAN_COUNTRIES_DE.stream()
                 .anyMatch(country -> password.toLowerCase().contains(country.toLowerCase()));
@@ -152,12 +152,12 @@ public class SecuriTease implements PasswordValidator {
         return containsCountryDE || containsCountryEN;
     }
 
-    private boolean checkContainsComposer(String password, int threshold) {
+    boolean checkContainsComposer(String password, int threshold) {
         // Checks if password contains a famous composer, case-insensitive
         return Composers.stream().anyMatch(composer -> password.toLowerCase().contains(composer.toLowerCase()));
     }
 
-    private boolean checkMeaningOfLife(String password, int threshold) {
+    boolean checkMeaningOfLife(String password, int threshold) {
         return password.contains("42");
     }
 }

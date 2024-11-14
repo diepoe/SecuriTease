@@ -1,4 +1,4 @@
-import com.diepoe.securitease.SecuriTease;
+package com.diepoe.securitease;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,6 +23,7 @@ public class SecuriTeaseTest {
                 "[Augenrollen] Hör mal, Schnegge, wenn du denkst, dass ich deinen Furz von Passwort akzeptiere, dann hast du dich geschnitten. 8 Buchstaben in deiner hässlichen Handschrift oder mehr - ich mache die Regeln nicht... oh warte, doch. 💅✨",
                 "[Roule les yeux de façon dramatique] Écoute, chérie, si tu crois que je vais accepter ton petit mot de passe aussi court qu'un pet qui pue, tu te trompes. Mets 8 caractères ou plus - ce n'est pas moi qui fais les règles... oh attends, si je les fais. 💅✨" };
         String got = securiTease.validate(invalidPassword).message();
+
 
         assertFalse(securiTease.validate(invalidPassword).isValid(), "Password is valid but should be invalid");
         assertTrue(Arrays.asList(want).contains(got),
