@@ -88,7 +88,7 @@ classDiagram
         }
 
         class CheckingFunction {
-            boolean check(String password, int threshold)
+            check(String password, int threshold) boolean
         }
 
         class Rule {
