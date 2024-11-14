@@ -1,4 +1,3 @@
-import com.cthiebaud.passwordvalidator.ValidationResult;
 import com.diepoe.securitease.SecuriTease;
 
 import org.junit.jupiter.api.Test;
@@ -26,7 +25,7 @@ public class SecuriTeaseTest {
     @Test
     public void testValidPassword() {
         SecuriTease securiTease = new SecuriTease();
-        String validPassword = "42WagnerXXXXIItaly312";
+        String validPassword = "42WagnerXXXXIItaly312"; // a minimal valid password
 
         assertTrue(securiTease.validate(validPassword).isValid(), "Password is invalid but should be valid");
         assertEquals(
