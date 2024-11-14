@@ -103,7 +103,7 @@ classDiagram
         }
     }
 
-    <<interface>> CheckingFunction
+    <<FunctionalInterface>> CheckingFunction
 
     %% given by @cthiebaud:
 
