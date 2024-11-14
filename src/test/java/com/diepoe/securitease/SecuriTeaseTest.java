@@ -6,16 +6,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 
-public class SecuriTeaseTest {
+class SecuriTeaseTest {
     private SecuriTease securiTease;
 
     @BeforeEach
-    public void init() {
+    void init() {
         securiTease = new SecuriTease();
     }
 
     @Test
-    public void testInvalidPassword() {
+    void testInvalidPassword() {
         String invalidPassword = "pasword"; // too short
 
         String[] want = {
@@ -24,19 +24,27 @@ public class SecuriTeaseTest {
                 "[Roule les yeux de façon dramatique] Écoute, chérie, si tu crois que je vais accepter ton petit mot de passe aussi court qu'un pet qui pue, tu te trompes. Mets 8 caractères ou plus - ce n'est pas moi qui fais les règles... oh attends, si je les fais. 💅✨" };
         String got = securiTease.validate(invalidPassword).message();
 
-
         assertFalse(securiTease.validate(invalidPassword).isValid(), "Password is valid but should be invalid");
         assertTrue(Arrays.asList(want).contains(got),
                 String.format("Invalid password message not found, got: %s", got));
     }
 
     @Test
-    public void testValidPassword() {
+    void testValidPassword() {
         String validPassword = "42WagnerXXXXIItaly312"; // a minimal valid password
 
         assertTrue(securiTease.validate(validPassword).isValid(), "Password is invalid but should be valid");
         assertEquals(
                 "[Slow clap] Ohhh, congratulations, you finally managed to enter a valid password. Want a cookie for doing the absolute bare minimum? 🙄",
                 securiTease.validate(validPassword).message());
+    }
+
+    @Test
+    void testCheckRomanLiteralSum() {
+        String gotString = "IXasldfkjL"; // = 59
+        int threshold = 59;
+
+        boolean got = securiTease.checkRomanLiteralSum(gotString, threshold);
+        assertTrue(got, "Roman literal isn't equal to threshold");
     }
 }
