@@ -59,14 +59,15 @@ title: SecuriTease
 ---
 classDiagram
     ValidationResult -- PasswordValidator
-    PasswordValidator <|-- SecuriTease : implements
+    PasswordValidator <|.. SecuriTease : implements
     SecuriTease <.. SecuriTeaseApp
     Rule -- CheckingFunction
-    SecuriTease -- Rule
+    SecuriTease "1" *-- "1..*" Rule
     
     namespace com.diepoe {
         class SecuriTeaseApp {
             +main()$
+            -printWelcome()$
         }
 
         class com.diepoe.securitease
@@ -79,9 +80,11 @@ classDiagram
             -List~String~ EUROPEAN_COUNTRIES_EN$
             -Map~Character, Integer~ ROMAN_VALUES$
             +validate(String potentialPassword) ValidationResult
-            -checkLength(String password, int requiredLength) boolean
-            -checkRomanLiteralSum(String password, int requiredSum) boolean
-            -checkContainsEuropeanCountry(String password, int threshold) boolean
+            ~checkLength(String password, int requiredLength) boolean
+            ~checkRomanLiteralSum(String password, int requiredSum) boolean
+            ~checkContainsEuropeanCountry(String password, int threshold) boolean
+            ~checkContainsComposer(String password, int threshold) boolean
+            ~checkMeaningOfLife(String password, int threshold) boolean
         }
 
         class CheckingFunction {
@@ -92,6 +95,11 @@ classDiagram
             -CheckingFunction checkingFunction;
             -String[] feedbackMessage;
             -int threshold;
+            +getCheckingFunction() CheckingFunction
+            +getFeedbackMessages() String[]
+            +getFeedbackMessage(int index) String
+            +getRandomFeedbackMessage() String
+            +getThreshold() int
         }
     }
 
