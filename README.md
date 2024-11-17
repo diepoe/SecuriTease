@@ -35,13 +35,18 @@ java -cp "target/classes:/Users/$(whoami)/.m2/repository/com/cthiebaud/password-
 
 ### Testing
 
-#### run unit tests
+#### Run unit tests
 
 ```sh
 mvn clean test
 ```
 
-#### run grading testing program
+> **Note -** The following tests are ran: 
+> 1. complete check of a invalid password
+> 2. complete check of a valid password
+> 3. one test at a time for each `CheckingFunction`
+
+#### Run the grading testing program ([`com.cthiebaud.PasswordValidatorTester`](https://github.com/athenaeum-brew/password-validator/blob/main/src/main/java/com/cthiebaud/PasswordValidatorTester.java))
 
 1. Package the project
 ```sh

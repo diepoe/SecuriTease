@@ -1,6 +1,7 @@
 package com.diepoe.securitease;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,6 +15,7 @@ class SecuriTeaseTest {
         securiTease = new SecuriTease();
     }
 
+    @DisplayName("Test invalid password")
     @Test
     void testInvalidPassword() {
         String invalidPassword = "pasword"; // too short
@@ -29,6 +31,7 @@ class SecuriTeaseTest {
                 String.format("Invalid password message not found, got: %s", got));
     }
 
+    @DisplayName("Test valid password")
     @Test
     void testValidPassword() {
         String validPassword = "42WagnerXXXXIItaly312"; // a minimal valid password
@@ -39,6 +42,7 @@ class SecuriTeaseTest {
                 securiTease.validate(validPassword).message());
     }
 
+    @DisplayName("Test CheckingFunction: roman literal sum")
     @Test
     void testCheckRomanLiteralSum() {
         String gotString = "IXasldfkjL"; // = 59
@@ -46,5 +50,35 @@ class SecuriTeaseTest {
 
         boolean got = securiTease.checkRomanLiteralSum(gotString, threshold);
         assertTrue(got, "Roman literal isn't equal to threshold");
+    }
+
+    @DisplayName("Test CheckingFunction: contains European country")
+    @Test
+    void testCheckContainsEuropeanCountry() {
+        String gotString = "Germany";
+        int threshold = 1;
+
+        boolean got = securiTease.checkContainsEuropeanCountry(gotString, threshold);
+        assertTrue(got, "Error: string doesn't contain European country");
+    }
+
+    @DisplayName("Test CheckingFunction: contains composer")
+    @Test
+    void testCheckContainsComposer() {
+        String gotString = "Bach";
+        int threshold = 1;
+
+        boolean got = securiTease.checkContainsComposer(gotString, threshold);
+        assertTrue(got, "Error: string doesn't contain composer");
+    }
+
+    @DisplayName("Test CheckingFunction: meaning of life")
+    @Test
+    void testCheckMeaningOfLife() {
+        String gotString = "42";
+        int threshold = 42;
+
+        boolean got = securiTease.checkMeaningOfLife(gotString, threshold);
+        assertTrue(got, "Error: string doesn't contain \"42\"");
     }
 }
