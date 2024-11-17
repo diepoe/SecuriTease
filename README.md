@@ -1,6 +1,9 @@
 # SecuriTease
 
-The Sassy Security Checker
+The Sassy Security Checker.
+Bored by the wastelands of password creators? We have the solution: SecuriTease - the password validator that drives you even crazier, and that in three languages. Have fun and...
+
+don't die...
 
 ## Development setup
 
