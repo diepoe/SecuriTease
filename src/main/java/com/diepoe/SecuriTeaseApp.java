@@ -51,12 +51,21 @@ public class SecuriTeaseApp {
     }
 
     public static void printWelcome() {
-        System.out.println("   _____ ______ _____ _    _ _____  _____ _______ ______          _____ ______ ");
-        System.out.println("  / ____|  ____/ ____| |  | |  __ \\|_   _|__   __|  ____|   /\\   / ____|  ____|");
-        System.out.println(" | (___ | |__ | |    | |  | | |__) | | |    | |  | |__     /  \\ | (___ | |__   ");
-        System.out.println("  \\___ \\|  __|| |    | |  | |  _  /  | |    | |  |  __|   / /\\ \\ \\___ \\|  __|  ");
-        System.out.println("  ____) | |___| |____| |__| | | \\ \\ _| |_   | |  | |____ / ____ \\____) | |____ ");
-        System.out.println(" |_____/|______\\_____||____/|_|  \\_\\_____|  |_|  |______/_/    \\_\\_____/|______|");
+        final String RESET = "\033[0m";
+        final String TRUE_PINK = "\033[38;2;255;20;147m";
+
+        System.out.println(
+                TRUE_PINK + "   _____ ______ _____ _    _ _____  _____ _______ ______          _____ ______ " + RESET);
+        System.out.println(TRUE_PINK
+                + "  / ____|  ____/ ____| |  | |  __ \\|_   _|__   __|  ____|   /\\   / ____|  ____|" + RESET);
+        System.out.println(
+                TRUE_PINK + " | (___ | |__ | |    | |  | | |__) | | |    | |  | |__     /  \\ | (___ | |__   " + RESET);
+        System.out.println(TRUE_PINK
+                + "  \\___ \\|  __|| |    | |  | |  _  /  | |    | |  |  __|   / /\\ \\ \\___ \\|  __|  " + RESET);
+        System.out.println(TRUE_PINK
+                + "  ____) | |___| |____| |__| | | \\ \\ _| |_   | |  | |____ / ____ \\____) | |____ " + RESET);
+        System.out.println(TRUE_PINK
+                + " |_____/|______\\_____||____/|_|  \\_\\_____|  |_|  |______/_/    \\_\\_____/|______|" + RESET);
         System.out.println();
     }
 }
