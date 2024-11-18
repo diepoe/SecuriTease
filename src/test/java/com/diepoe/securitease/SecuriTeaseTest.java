@@ -34,7 +34,7 @@ class SecuriTeaseTest {
     @DisplayName("Test valid password")
     @Test
     void testValidPassword() {
-        String validPassword = "42WagnerXXXXIItaly312"; // a minimal valid password
+        String validPassword = "42WagnerXXXXIItaly312//"; // a minimal valid password
 
         assertTrue(securiTease.validate(validPassword).isValid(), "Password is invalid but should be valid");
         assertEquals(
