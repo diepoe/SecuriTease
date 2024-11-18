@@ -1,5 +1,9 @@
 package com.diepoe.securitease;
 
+/**
+ * 
+ * @author Dietrich Poensgen, Mikail Demirel
+ */
 class Rule {
     private CheckingFunction checkingFunction;
     private String[] feedbackMessages;

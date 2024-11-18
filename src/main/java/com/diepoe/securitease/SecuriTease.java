@@ -13,6 +13,7 @@ import com.cthiebaud.passwordvalidator.ValidationResult;
  * PasswordValidator interface
  * 
  * @implNote PasswordValidator prerequisite for the project design
+ * @author Dietrich Poensgen, Mikail Demirel
  */
 public class SecuriTease implements PasswordValidator {
     private List<Rule> rules;

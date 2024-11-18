@@ -6,6 +6,9 @@ import java.io.Console;
 
 import com.cthiebaud.passwordvalidator.ValidationResult;
 
+/**
+ * @author Dietrich Poensgen, Mikail Demirel
+ */
 public class SecuriTeaseApp {
     public static void main(String[] args) {
         printWelcome();
