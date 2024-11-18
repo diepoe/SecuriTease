@@ -1,3 +1,7 @@
+<center>
+    <img src="https://github.com/diepoe/SecuriTease/tree/main/.github/SecuriTease-Logo.png" alt="securitease logo">
+</center>
+
 # SecuriTease
 
 The Sassy Security Checker.
