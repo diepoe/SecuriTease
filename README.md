@@ -1,5 +1,5 @@
 <center>
-    <img src="https://github.com/diepoe/SecuriTease/tree/main/.github/SecuriTease-Logo.png" alt="securitease logo">
+    <img src="https://github.com/diepoe/SecuriTease/blob/main/.github/SecuriTease-Logo.png?raw=true" alt="securitease logo">
 </center>
 
 # SecuriTease
