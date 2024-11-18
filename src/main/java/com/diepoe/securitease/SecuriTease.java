@@ -53,6 +53,11 @@ public class SecuriTease implements PasswordValidator {
             "Mahler", "Debussy", "Haydn", "Mendelssohn", "Händel", "Liszt",
             "Rachmaninoff", "Ravel", "Kreisler");
 
+    private static final List<Character> SPECIAL_CHARACTERS = Arrays.asList(
+    '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '{', '}',
+    '[', ']', ':', ';', '"', '\'', '<', '>', ',', '.', '?', '/', '\\', '|', '~', '`');
+
+
     public SecuriTease() {
         // TODO: implement randomized setting of the rules
         rules = new ArrayList<>();
@@ -70,8 +75,13 @@ public class SecuriTease implements PasswordValidator {
                 new String[] { "Password must contain the name of a European country" }, 1));
         rules.add(new Rule(this::checkContainsComposer,
                 new String[] { "Password must contain the name of a famous composer" }, 1));
-        rules.add(new Rule(this::checkMeaningOfLife, // Neu Mika
-                new String[] { "What is the meaning of life?" }, 42)); // Neu Mika
+        rules.add(new Rule(this::checkEiffelTowerHeight, 
+                new String[] { "How tall is the Eiffel Tower?" }, 0)); //Neu Mika
+        rules.add(new Rule(this::checkSpecialCharacters, // neu mika
+        new String[] { "Your password needs at least 2 fabulous special characters. ✨" }, 2)); // Neu mika
+        rules.add(new Rule(this::checkMeaningOfLife, //Neu Mika
+                new String[] { "What is the meaning of life?" }, 42)); //Neu Mika
+        
 
     }
 
@@ -157,7 +167,42 @@ public class SecuriTease implements PasswordValidator {
         return Composers.stream().anyMatch(composer -> password.toLowerCase().contains(composer.toLowerCase()));
     }
 
+    boolean checkEiffelTowerHeight(String password, int threshold) {
+        String regex = "\\d+"; // Regex für Zahlen
+        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(regex);
+        java.util.regex.Matcher matcher = pattern.matcher(password);
+    
+        while (matcher.find()) {
+            try {
+                int height = Integer.parseInt(matcher.group());
+                if (height >= 300 && height <= 320) {
+                    return true;
+                }
+            } 
+            catch (NumberFormatException e) {
+                    return false; 
+                }
+        }
+        
+        // Wenn keine Zahl im gültigen Bereich gefunden wird, ist die Regel nicht erfüllt
+        return false;
+    }
+
     boolean checkMeaningOfLife(String password, int threshold) {
         return password.contains("42");
     }
+
+    boolean checkSpecialCharacters(String password, int threshold) {
+        int specialCharCount = 0;
+        for (char c : password.toCharArray()) {
+            if (SPECIAL_CHARACTERS.contains(c)) {
+                specialCharCount++;
+                if (specialCharCount >= threshold) {
+                    return true;
+                } 
+            }
+        }
+        return false;
+}
+
 }
