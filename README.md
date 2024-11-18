@@ -147,3 +147,7 @@ classDiagram
     <<interface>> PasswordValidator
 
 ```
+
+---
+
+**Group members:** Mikail & Dietrich
