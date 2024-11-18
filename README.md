@@ -96,6 +96,8 @@ classDiagram
             ~checkRomanLiteralSum(String password, int requiredSum) boolean
             ~checkContainsEuropeanCountry(String password, int threshold) boolean
             ~checkContainsComposer(String password, int threshold) boolean
+            ~checkContainsEiffelTowerHeight(String password, int threshold) boolean
+            ~checkSpecialCharacters(String password, int threshold) boolean
             ~checkMeaningOfLife(String password, int threshold) boolean
         }
 
