@@ -2,12 +2,12 @@ package com.diepoe.securitease;
 
 class Rule {
     private CheckingFunction checkingFunction;
-    private String[] feedbackMessage;
+    private String[] feedbackMessages;
     private int threshold;
 
-    public Rule(CheckingFunction checkingFunction, String[] feedbackMessage, int threshold) {
+    public Rule(CheckingFunction checkingFunction, String[] feedbackMessages, int threshold) {
         this.checkingFunction = checkingFunction;
-        this.feedbackMessage = feedbackMessage;
+        this.feedbackMessages = feedbackMessages;
         this.threshold = threshold;
     }
 
@@ -15,8 +15,17 @@ class Rule {
         return checkingFunction;
     }
 
-    public String[] getFeedbackMessage() {
-        return feedbackMessage;
+    public String[] getFeedbackMessages() {
+        return feedbackMessages;
+    }
+
+    public String getFeedbackMessage(int index) {
+        return feedbackMessages[index];
+    }
+
+    public String getRandomFeedbackMessage() {
+        int randomIndex = (int) (Math.random() * feedbackMessages.length);
+        return feedbackMessages[randomIndex];
     }
 
     public int getThreshold() {

@@ -1,6 +1,9 @@
 # SecuriTease
 
-The Sassy Security Checker
+The Sassy Security Checker.
+Bored by the wastelands of password creators? We have the solution: SecuriTease - the password validator that drives you even crazier, and that in three languages. Have fun and...
+
+don't die...
 
 ## Development setup
 
@@ -32,13 +35,18 @@ java -cp "target/classes:/Users/$(whoami)/.m2/repository/com/cthiebaud/password-
 
 ### Testing
 
-#### run unit tests
+#### Run unit tests
 
 ```sh
 mvn clean test
 ```
 
-#### run grading testing program
+> **Note -** The following tests are ran: 
+> 1. complete check of a invalid password
+> 2. complete check of a valid password
+> 3. one test at a time for each `CheckingFunction`
+
+#### Run the grading testing program ([`com.cthiebaud.PasswordValidatorTester`](https://github.com/athenaeum-brew/password-validator/blob/main/src/main/java/com/cthiebaud/PasswordValidatorTester.java))
 
 1. Package the project
 ```sh
@@ -59,14 +67,15 @@ title: SecuriTease
 ---
 classDiagram
     ValidationResult -- PasswordValidator
-    PasswordValidator <|-- SecuriTease : implements
+    PasswordValidator <|.. SecuriTease : implements
     SecuriTease <.. SecuriTeaseApp
     Rule -- CheckingFunction
-    SecuriTease -- Rule
+    SecuriTease "1" *-- "1..*" Rule
     
     namespace com.diepoe {
         class SecuriTeaseApp {
             +main()$
+            -printWelcome()$
         }
 
         class com.diepoe.securitease
@@ -79,23 +88,30 @@ classDiagram
             -List~String~ EUROPEAN_COUNTRIES_EN$
             -Map~Character, Integer~ ROMAN_VALUES$
             +validate(String potentialPassword) ValidationResult
-            -checkLength(String password, int requiredLength) boolean
-            -checkRomanLiteralSum(String password, int requiredSum) boolean
-            -checkContainsEuropeanCountry(String password, int threshold) boolean
+            ~checkLength(String password, int requiredLength) boolean
+            ~checkRomanLiteralSum(String password, int requiredSum) boolean
+            ~checkContainsEuropeanCountry(String password, int threshold) boolean
+            ~checkContainsComposer(String password, int threshold) boolean
+            ~checkMeaningOfLife(String password, int threshold) boolean
         }
 
         class CheckingFunction {
-            boolean check(String password, int threshold)
+            check(String password, int threshold) boolean
         }
 
         class Rule {
             -CheckingFunction checkingFunction;
             -String[] feedbackMessage;
             -int threshold;
+            +getCheckingFunction() CheckingFunction
+            +getFeedbackMessages() String[]
+            +getFeedbackMessage(int index) String
+            +getRandomFeedbackMessage() String
+            +getThreshold() int
         }
     }
 
-    <<interface>> CheckingFunction
+    <<FunctionalInterface>> CheckingFunction
 
     %% given by @cthiebaud:
 
