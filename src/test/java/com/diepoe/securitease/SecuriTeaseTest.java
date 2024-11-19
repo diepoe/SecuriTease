@@ -92,7 +92,7 @@ class SecuriTeaseTest {
         assertTrue(got, "Error: string doesn't contain Special Character");
     }
 
-    @DisplayName("Test CheckingFunction: Special Characters")
+    @DisplayName("Test CheckingFunction: Eiffel Tower Height")
     @Test
     void testCheckEiffelTowerHeight() {
         String gotString = "312";
