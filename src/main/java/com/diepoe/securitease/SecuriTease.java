@@ -55,9 +55,8 @@ public class SecuriTease implements PasswordValidator {
             "Rachmaninoff", "Ravel", "Kreisler");
 
     private static final List<Character> SPECIAL_CHARACTERS = Arrays.asList(
-    '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '{', '}',
-    '[', ']', ':', ';', '"', '\'', '<', '>', ',', '.', '?', '/', '\\', '|', '~', '`');
-
+            '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '{', '}',
+            '[', ']', ':', ';', '"', '\'', '<', '>', ',', '.', '?', '/', '\\', '|', '~', '`');
 
     public SecuriTease() {
         // TODO: implement randomized setting of the rules
@@ -76,13 +75,12 @@ public class SecuriTease implements PasswordValidator {
                 new String[] { "Password must contain the name of a European country" }, 1));
         rules.add(new Rule(this::checkContainsComposer,
                 new String[] { "Password must contain the name of a famous composer" }, 1));
-        rules.add(new Rule(this::checkEiffelTowerHeight, 
-                new String[] { "How tall is the Eiffel Tower?" }, 0)); //Neu Mika
+        rules.add(new Rule(this::checkEiffelTowerHeight,
+                new String[] { "How tall is the Eiffel Tower?" }, 0)); // Neu Mika
         rules.add(new Rule(this::checkSpecialCharacters, // neu mika
-        new String[] { "Your password needs at least 2 fabulous special characters. ✨" }, 2)); // Neu mika
-        rules.add(new Rule(this::checkMeaningOfLife, //Neu Mika
-                new String[] { "What is the meaning of life?" }, 42)); //Neu Mika
-        
+                new String[] { "Your password needs at least 2 fabulous special characters. ✨" }, 2)); // Neu mika
+        rules.add(new Rule(this::checkMeaningOfLife, // Neu Mika
+                new String[] { "What is the meaning of life?" }, 42)); // Neu Mika
 
     }
 
@@ -172,20 +170,20 @@ public class SecuriTease implements PasswordValidator {
         String regex = "\\d+"; // Regex für Zahlen
         java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(regex);
         java.util.regex.Matcher matcher = pattern.matcher(password);
-    
+
         while (matcher.find()) {
             try {
                 int height = Integer.parseInt(matcher.group());
                 if (height >= 300 && height <= 320) {
                     return true;
                 }
-            } 
-            catch (NumberFormatException e) {
-                    return false; 
-                }
+            } catch (NumberFormatException e) {
+                return false;
+            }
         }
-        
-        // Wenn keine Zahl im gültigen Bereich gefunden wird, ist die Regel nicht erfüllt
+
+        // Wenn keine Zahl im gültigen Bereich gefunden wird, ist die Regel nicht
+        // erfüllt
         return false;
     }
 
@@ -200,10 +198,10 @@ public class SecuriTease implements PasswordValidator {
                 specialCharCount++;
                 if (specialCharCount >= threshold) {
                     return true;
-                } 
+                }
             }
         }
         return false;
-}
+    }
 
 }
