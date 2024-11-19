@@ -152,6 +152,14 @@ public class SecuriTease implements PasswordValidator {
         return sum == requiredSum;
     }
 
+    /**
+     * Checks if the given password string contains the name of a European country
+     * 
+     * @param password  the string to be checked
+     * @param threshold this param is ignored
+     * @return true if the password contains the name of a European country, else
+     *         false
+     */
     boolean checkContainsEuropeanCountry(String password, int threshold) {
         // Checks if password contains a European Country, case-insensitive
         boolean containsCountryDE = EUROPEAN_COUNTRIES_DE.stream()
@@ -161,6 +169,14 @@ public class SecuriTease implements PasswordValidator {
         return containsCountryDE || containsCountryEN;
     }
 
+    /**
+     * Checks if the given password string contains the name of a famous composer
+     * 
+     * @param password  the string to be checked
+     * @param threshold this param is ignored
+     * @return true if the password contains the name of a famous composer, else
+     *         false
+     */
     boolean checkContainsComposer(String password, int threshold) {
         // Checks if password contains a famous composer, case-insensitive
         return Composers.stream().anyMatch(composer -> password.toLowerCase().contains(composer.toLowerCase()));
