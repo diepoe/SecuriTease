@@ -81,4 +81,24 @@ class SecuriTeaseTest {
         boolean got = securiTease.checkMeaningOfLife(gotString, threshold);
         assertTrue(got, "Error: string doesn't contain \"42\"");
     }
+
+    @DisplayName("Test CheckingFunction: Special Characters")
+    @Test
+    void testCheckSpecialCharacter() {
+        String gotString = "@/);";
+        int threshold = 4;
+
+        boolean got = securiTease.checkSpecialCharacters(gotString, threshold);
+        assertTrue(got, "Error: string doesn't contain Special Character");
+    }
+
+    @DisplayName("Test CheckingFunction: Special Characters")
+    @Test
+    void testCheckEiffelTowerHeight() {
+        String gotString = "312";
+        int threshold = 1;
+
+        boolean got = securiTease.checkEiffelTowerHeight(gotString, threshold);
+        assertTrue(got, "Error: string doesn't contain the height of the Eiffel tower");
+    }
 }
