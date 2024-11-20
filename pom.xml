@@ -7,6 +7,29 @@
     <groupId>com.diepoe</groupId>
     <artifactId>securitease</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <developers>
+        <developer>
+            <id>diepoe</id>
+            <name>Dietrich Poensgen</name>
+            <email>die.poensgen.24@heilbronn.dhbw.de</email>
+            <url>https://github.com/diepoe</url>
+        </developer>
+        <developer>
+            <id>dmrmika</id>
+            <name>Mikail Mert Demirel</name>
+            <email>mik.demirel.24@heilbronn.dhbw.de</email>
+            <url>https://github.com/dmrmika</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/diepoe/SecuriTease</url>
+        <connection>scm:git:https://github.com/diepoe/SecuriTease.git</connection>
+        <developerConnection>scm:git:git@github.com:diepoe/SecuriTease.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
 
     <distributionManagement>
         <repository>
