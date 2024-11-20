@@ -54,12 +54,14 @@ public class SecuriTease implements PasswordValidator {
             "Mahler", "Debussy", "Haydn", "Mendelssohn", "Händel", "Liszt",
             "Rachmaninoff", "Ravel", "Kreisler");
 
+    // List of accepted special characters
     private static final List<Character> SPECIAL_CHARACTERS = Arrays.asList(
             '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '{', '}',
             '[', ']', ':', ';', '"', '\'', '<', '>', ',', '.', '?', '/', '\\', '|', '~', '`');
 
     public SecuriTease() {
-        // TODO: implement randomized setting of the rules
+        // potential TODO: implement randomized setting of the rules for more fun ;)
+
         rules = new ArrayList<>();
 
         rules.add(new Rule(this::checkLength, new String[] {
@@ -105,9 +107,6 @@ public class SecuriTease implements PasswordValidator {
         return new ValidationResult(valid, message);
     }
 
-    // TODO create various types of checking methods for different yet-to-specify
-    // rules
-
     /**
      * Checks if a given password meets a certain length criteria
      * 
@@ -123,7 +122,7 @@ public class SecuriTease implements PasswordValidator {
      * Checks if the sum of the Roman numeral literals in the given password equals
      * the required sum (threshold).
      *
-     * @param password    the string containing Roman numeral literals to be checked
+     * @param password    the string to be checked
      * @param requiredSum the sum that the Roman numeral literals in the password
      *                    should equal
      * @return true if the sum of the Roman numeral literals equals the required
@@ -182,6 +181,16 @@ public class SecuriTease implements PasswordValidator {
         return Composers.stream().anyMatch(composer -> password.toLowerCase().contains(composer.toLowerCase()));
     }
 
+    /**
+     * Checks if the given password string contains the approximate height of the
+     * eiffel tower in meters
+     * 
+     * @param password  the string to be checked
+     * @param threshold this param is ignored
+     * @return true if the password contains the the approximate height (300-320),
+     *         else
+     *         false
+     */
     boolean checkEiffelTowerHeight(String password, int threshold) {
         String regex = "\\d+"; // Regex für Zahlen
         java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(regex);
@@ -203,10 +212,29 @@ public class SecuriTease implements PasswordValidator {
         return false;
     }
 
+    /**
+     * Checks if the given password string contains the meaning of life
+     * 
+     * @param password  the string to be checked
+     * @param threshold comm'on this shouldn't be a thing, there is only one
+     *                  answer to the question
+     * @return if the password has gotten the meaning of life right
+     */
     boolean checkMeaningOfLife(String password, int threshold) {
         return password.contains("42");
     }
 
+    /**
+     * Checks if the given password string contains a certain amount of special
+     * characters
+     * 
+     * @param password  the string to be checked
+     * @param threshold the amount of special characters that should be in the
+     *                  password
+     * @return true if the password contains the required amount of special
+     *         characters, else
+     *         false
+     */
     boolean checkSpecialCharacters(String password, int threshold) {
         int specialCharCount = 0;
         for (char c : password.toCharArray()) {
