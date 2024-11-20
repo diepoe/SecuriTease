@@ -12,7 +12,9 @@ import com.cthiebaud.passwordvalidator.ValidationResult;
  * This class bundles the application logic while implementing the
  * PasswordValidator interface
  * 
- * @implNote PasswordValidator prerequisite for the project design
+ * Implements PasswordValidator interface as the prerequisite for the project
+ * design
+ * 
  * @author Dietrich Poensgen, Mikail Demirel
  */
 public class SecuriTease implements PasswordValidator {
@@ -59,6 +61,10 @@ public class SecuriTease implements PasswordValidator {
             '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '{', '}',
             '[', ']', ':', ';', '"', '\'', '<', '>', ',', '.', '?', '/', '\\', '|', '~', '`');
 
+    /**
+     * Constructor for the SecuriTease class which initializes and configures the
+     * rules
+     */
     public SecuriTease() {
         // potential TODO: implement randomized setting of the rules for more fun ;)
 

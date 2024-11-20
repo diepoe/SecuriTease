@@ -1,6 +1,8 @@
 package com.diepoe.securitease;
 
 /**
+ * Rule class that contains a checking function, feedback messages and a
+ * threshold. Represents a single rule that is checked by the validator.
  * 
  * @author Dietrich Poensgen, Mikail Demirel
  */
