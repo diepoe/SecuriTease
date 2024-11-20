@@ -9,6 +9,17 @@ Bored by the wastelands of password creators? We have the solution: SecuriTease 
 
 don't die...
 
+## Validation rules
+
+- **Length**
+	- a modifiable minimal length of the password, ensures safety against brute-force attacks
+- **RomanLiteralSum**
+- **ContainsEuropeanCountry**
+- **ContainsComposer**
+- **ContainsEiffelTowerHeight**
+- **SpecialCharacters**
+- **Meaning Of Life**
+
 ## Development setup
 
 > **Requirements:** Java 23 & Maven
