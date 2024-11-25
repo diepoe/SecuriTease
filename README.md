@@ -14,7 +14,7 @@ don't die...
 - **Length**
 	- A modifiable minimal length of the password, ensures safety against brute-force attacks - because short passwords are for amateurs
 - **RomanLiteralSum**
-    - A modifiable number that is required to be represtented in the String as Roman numerals - Caesar would be proud!
+    - A modifiable number that is required to be represtented in the String as sum of Roman numerals - Caesar would be proud!
 - **ContainsEuropeanCountry**
     - A European country — even the hacker has to let his inner traveler shine!
 - **ContainsComposer**
