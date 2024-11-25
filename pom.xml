@@ -6,7 +6,7 @@
 
     <groupId>com.diepoe</groupId>
     <artifactId>securitease</artifactId>
-    <version>1.0.1-PRERELEASE</version>
+    <version>1.0.2-PRERELEASE</version>
     <packaging>jar</packaging>
 
     <developers>
