@@ -12,13 +12,19 @@ don't die...
 ## Validation rules
 
 - **Length**
-	- a modifiable minimal length of the password, ensures safety against brute-force attacks
+	- A modifiable minimal length of the password, ensures safety against brute-force attacks - because short passwords are for amateurs
 - **RomanLiteralSum**
+    - A modifiable number that is required to be represtented in the String as Roman numerals - Caesar would be proud!
 - **ContainsEuropeanCountry**
+    - A European country — even the hacker has to let his inner traveler shine!
 - **ContainsComposer**
+    - A name of a famous composer must be included - this is in fact no classic prerequisite!
 - **ContainsEiffelTowerHeight**
+    - Est-ce que tu parles français? no? -  me neither. Let´s leave this French-inspired riddle to numbers...
 - **SpecialCharacters**
+    - A few special characters must be sprinkled in - passwords without these are like cakes without frosting.
 - **Meaning Of Life**
+    - A tricky one! What is the meaning of life? - If Douglas Adams approves, so will the password validator.
 
 ## Development setup
 
