@@ -7,9 +7,18 @@ import java.io.Console;
 import com.cthiebaud.passwordvalidator.ValidationResult;
 
 /**
+ * Demo application for the SecuriTease password validator.
+ * 
  * @author Dietrich Poensgen, Mikail Demirel
  */
 public class SecuriTeaseApp {
+    /**
+     * Main method for the SecuriTeaseApp. This method will prompt the user for a
+     * password to validate as long as the user does not type 'quit' or provide a
+     * valid password twice.
+     * 
+     * @param args Command line arguments (unused).
+     */
     public static void main(String[] args) {
         printWelcome();
 
@@ -53,6 +62,9 @@ public class SecuriTeaseApp {
         }
     }
 
+    /**
+     * Prints a colored welcome message to the console.
+     */
     public static void printWelcome() {
         final String RESET = "\033[0m";
         final String TRUE_PINK = "\033[38;2;255;20;147m";

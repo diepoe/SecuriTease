@@ -10,10 +10,11 @@ import com.cthiebaud.passwordvalidator.ValidationResult;
 
 /**
  * This class bundles the application logic while implementing the
- * PasswordValidator interface
+ * PasswordValidator interface.
  * 
- * Implements PasswordValidator interface as the prerequisite for the project
- * design
+ * Implements the PasswordValidator interface as the prerequisite for the
+ * project
+ * design.
  * 
  * @author Dietrich Poensgen, Mikail Demirel
  */
@@ -93,7 +94,10 @@ public class SecuriTease implements PasswordValidator {
     }
 
     /**
-     * main validation method
+     * Main validation method. Loops over the rules list, executes each rule's
+     * validation function and returns the rules random feedback message if the
+     * password is invalid.
+     * If all rules are passed, a default success message is returned.
      * 
      * @param potentialPassword the password to validate
      */
