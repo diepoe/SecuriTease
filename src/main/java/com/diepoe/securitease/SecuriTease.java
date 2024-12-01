@@ -104,7 +104,7 @@ public class SecuriTease implements PasswordValidator {
         }
 
         boolean valid = true;
-        String message = "[Slow clap] Ohhh, congratulations, you finally managed to enter a valid password. Want a cookie for doing the absolute bare minimum? 🙄";
+        String message = "[Slow clap] Ohhh, congratulations, you finally managed to enter a valid password. Want a cookie for doing the absolute bare minimum? 🍪🙄";
 
         for (Rule rule : rules) {
             boolean ruleValid = rule.getCheckingFunction().check(potentialPassword, rule.getThreshold());
