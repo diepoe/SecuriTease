@@ -102,7 +102,11 @@ public class SecuriTease implements PasswordValidator {
      * @param potentialPassword the password to validate
      */
     @Override
-    public ValidationResult validate(String potentialPassword) {
+    public ValidationResult validate(String potentialPassword) throws IllegalArgumentException {
+        if (potentialPassword == null) {
+            throw new IllegalArgumentException("Password cannot be null");
+        }
+
         boolean valid = true;
         String message = "[Slow clap] Ohhh, congratulations, you finally managed to enter a valid password. Want a cookie for doing the absolute bare minimum? 🙄";
 
