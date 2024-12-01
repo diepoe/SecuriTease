@@ -15,6 +15,15 @@ class SecuriTeaseTest {
         securiTease = new SecuriTease();
     }
 
+    @DisplayName("Test null password")
+    @Test
+    void testNullPassword() {
+        String nullPassword = null;
+
+        assertThrows(IllegalArgumentException.class, () -> securiTease.validate(nullPassword),
+                "Null password should throw IllegalArgumentException");
+    }
+
     @DisplayName("Test invalid password")
     @Test
     void testInvalidPassword() {
