@@ -100,6 +100,7 @@ public class SecuriTease implements PasswordValidator {
      * If all rules are passed, a default success message is returned.
      * 
      * @param potentialPassword the password to validate
+     * @throws IllegalArgumentException if the password is null
      */
     @Override
     public ValidationResult validate(String potentialPassword) throws IllegalArgumentException {
