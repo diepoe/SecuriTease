@@ -67,19 +67,6 @@ mvn clean test
 > 2. complete check of a valid password
 > 3. one test at a time for each `CheckingFunction`
 
-#### Run the grading testing program ([`com.cthiebaud.PasswordValidatorTester`](https://github.com/athenaeum-brew/password-validator/blob/main/src/main/java/com/cthiebaud/PasswordValidatorTester.java))
-
-1. Package the project
-```sh
-mvn clean package
-```
-
-2. Run the test program
-```sh
-java -cp "target/classes:/Users/$(whoami)/.m2/repository/com/cthiebaud/password-validator/1.0-SNAPSHOT/password-validator-1.0-SNAPSHOT.jar" com.cthiebaud.PasswordValidatorTester $PWD/target/securitease-1.0.0-SNAPSHOT.jar
-```
-
-
 ## Project structure
 
 ```mermaid
@@ -139,17 +126,8 @@ classDiagram
     %% given by @cthiebaud:
 
     namespace com.cthiebaud{
-        class PasswordValidatorTester {
-            +main(String[] args)$
-            -findPasswordValidatorClasses() List~Class~?~~$
-            -printBigOK()$
-        }
-
         class com.cthiebaud.passwordvalidator
     }
-    PasswordValidator <.. PasswordValidatorTester
-    SecuriTease <.. PasswordValidatorTester
-    ValidationResult <.. PasswordValidatorTester
 
     namespace com.cthiebaud.passwordvalidator{
         class ValidationResult {
