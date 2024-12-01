@@ -46,7 +46,7 @@ public class SecuriTeaseApp {
             // Display the result
             if (result.isValid()) {
                 char[] repeatedPasswordArray = console.readPassword(
-                        "Please repeat the password blindly (if your dumb brain can even remember it 🙄): ");
+                        "Please repeat the password blindly (if your small brain has the capacity 🙄): ");
                 String repeatedPassword = new String(repeatedPasswordArray);
 
                 if (password.equals(repeatedPassword)) {
@@ -54,7 +54,7 @@ public class SecuriTeaseApp {
                     break;
                 } else {
                     System.out.println(
-                            "[Exasperated sigh] Sweetie... how hard is it to type the same thing twice? Like, literally just copy what you did the first time? But nooo, here we are... Whenever you're ready to get it together, I'll be waiting. Try. Again. 💅");
+                            "[Exasperated sigh] Sweetie... how hard is it to type the same thing twice? Try. Again. 💅");
                 }
             } else {
                 System.out.println(result.message());

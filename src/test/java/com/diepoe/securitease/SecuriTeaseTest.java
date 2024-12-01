@@ -47,7 +47,7 @@ class SecuriTeaseTest {
 
         assertTrue(securiTease.validate(validPassword).isValid(), "Password is invalid but should be valid");
         assertEquals(
-                "[Slow clap] Ohhh, congratulations, you finally managed to enter a valid password. Want a cookie for doing the absolute bare minimum? 🙄",
+                "[Slow clap] Ohhh, congratulations, you finally managed to enter a valid password. Want a cookie for doing the absolute bare minimum? 🍪🙄",
                 securiTease.validate(validPassword).message());
     }
 
