@@ -63,9 +63,10 @@ mvn clean test
 ```
 
 > **Note -** The following tests are ran: 
-> 1. complete check of a invalid password
-> 2. complete check of a valid password
-> 3. one test at a time for each `CheckingFunction`
+> 1. check of a `null` password (exception expected)
+> 2. complete check of a invalid password
+> 3. complete check of a valid password
+> 4. one test at a time for each `CheckingFunction`
 
 ## Project structure
 
